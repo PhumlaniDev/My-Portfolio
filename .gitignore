@@ -17,6 +17,7 @@ speed-measure-plugin*.json
 # IDEs and editors
 /.idea
 .project
+.project
 .classpath
 .c9/
 *.launch
@@ -46,3 +47,7 @@ testem.log
 Thumbs.db
 *.swp
 *.lock
+
+.husky/_/
+
+.angular/cache/

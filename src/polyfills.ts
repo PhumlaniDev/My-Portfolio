@@ -55,8 +55,20 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
-
+import 'zone.js'; // NEW, CORRECT IMPORT
+/**
+ * Date, currency, decimal and percent pipes.
+ * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
+ */
+import 'intl'; // Run `npm install --save intl`.
+/**
+ * Need to import at least one locale-data with intl.
+ */
+import 'intl/locale-data/jsonp/en';
+/**
+ * This is required for the application to work in IE. It is a polyfill for the `fetch` API.
+ * It is not included in the default polyfills.ts file because it is not needed for modern browsers.
+ */
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
