@@ -99,8 +99,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/angular-portfolio:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/phumlani_arendse-portfolio:latest
 
   # deploy:
   #   name: Deploy to GitHub Pages
