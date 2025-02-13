@@ -26,12 +26,9 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-<<<<<<< HEAD
       - name: Run Prettier Fix
         run: npx prettier --write "src/**/*.ts"
 
-=======
->>>>>>> 430ae0e (added github workflow & prettier config)
       - name: Run Prettier Check
         run: npx prettier --check "src/**/*.ts"
 
@@ -58,7 +55,6 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-<<<<<<< HEAD
   # test:
   #   name: Run Unit Tests & Coverage
   #   runs-on: ubuntu-latest
@@ -86,35 +82,6 @@ jobs:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
     needs: [install-and-build, lint]
-=======
-  test:
-    name: Run Unit Tests & Coverage
-    runs-on: ubuntu-latest
-    needs: install-and-build
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Tests & Generate Coverage
-        run: npm test -- --watch=false --code-coverage
-
-      - name: Upload Coverage to Coveralls
-        run: cat coverage/lcov.info | npx coveralls --repo-token ${{ secrets.COVERALLS_REPO_TOKEN }}
-  
-  docker:
-    name: Build & Push Docker Image
-    runs-on: ubuntu-latest
-    needs: [install-and-build, lint, test]
->>>>>>> 430ae0e (added github workflow & prettier config)
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -126,17 +93,12 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-<<<<<<< HEAD
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-=======
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
->>>>>>> 430ae0e (added github workflow & prettier config)
 
       - name: Build & Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
-<<<<<<< HEAD
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/phumlani_arendse-portfolio:latest
@@ -167,34 +129,3 @@ jobs:
   #       with:
   #         branch: gh-pages
   #         folder: dist/YOUR_PROJECT_NAME
-=======
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/angular-portfolio:latest
-
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    needs: [install-and-build, lint, test, docker]
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build Project
-        run: npm run build --prod
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist/YOUR_PROJECT_NAME
->>>>>>> 430ae0e (added github workflow & prettier config)
